@@ -19,6 +19,10 @@ frontend:
       - amplify/**/*
 backend:
   phases:
+    preBuild:
+      commands:
+        - echo "Installing backend dependencies..."
+        - npm ci
     build:
       commands:
         - echo "Building backend..."
