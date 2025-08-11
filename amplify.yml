@@ -1,0 +1,33 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing dependencies..."
+        - npm ci
+    build:
+      commands:
+        - echo "Building the app..."
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - amplify/**/*
+backend:
+  phases:
+    build:
+      commands:
+        - echo "Building backend..."
+        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
+  artifacts:
+    baseDirectory: amplify
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - amplify/**/*
