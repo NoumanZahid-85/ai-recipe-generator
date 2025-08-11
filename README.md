@@ -7,7 +7,7 @@ A full‑stack React + AWS Amplify Gen 2 application that lets users authenticat
   <img src="docs/hero.png" alt="Meet Your Personal Recipe AI - hero screenshot" width="900" />
 </p>
 
-### What you’ll get
+### Tech Stack
 - **Frontend**: React + TypeScript + Vite 5, Amplify UI for Auth.
 - **Auth**: Amazon Cognito via Amplify `defineAuth` with email verification (custom subject/body).
 - **API**: Amplify Data (AppSync GraphQL) + custom resolver to call a Lambda.
@@ -28,25 +28,20 @@ A full‑stack React + AWS Amplify Gen 2 application that lets users authenticat
 
 ---
 
-## Gallery (screenshots & demo)
-Add the following images under `docs/` to enrich this README. Suggested filenames are already referenced below.
+## User Authentication Through Email 
 
-- App hero: `docs/hero.png`
-- Auth: `docs/auth-sign-in.png`
-- Create account: `docs/auth-create-account.png`
-- Verification code: `docs/verification-code.png`
-- Ingredient prompt UI: `docs/recipe-input.png`
-- End‑to‑end demo GIF: `docs/demo.gif`
+- User will authenticate through the Email by Generating Code.
 
 <p align="center">
   <img src="docs/auth-sign-in.png" alt="Amplify UI - Sign in" width="380" />
   <img src="docs/auth-create-account.png" alt="Amplify UI - Create account" width="380" />
 </p>
 
-<p align="center">
-  <img src="docs/verification-code.png" alt="Amplify UI - verification code" width="420" />
-  <img src="docs/recipe-input.png" alt="Ingredients input and Generate button" width="420" />
-</p>
+---
+
+## Live Demo of Project
+
+- Here User is querying the recipies through the ingridients as an input.
 
 <p align="center">
   <img src="docs/demo.gif" alt="End-to-end app demo" width="900" />
@@ -61,21 +56,6 @@ Add the following images under `docs/` to enrich this README. Suggested filename
 
 ---
 
-## Project structure
-```
-ai-recipe-generator/
-  amplify/                # Amplify Gen 2 backend (auth, data, build entry)
-    auth/resource.ts      # Cognito login/verification configuration
-    data/resource.ts      # Data schema + authorization modes
-    backend.ts            # Registers resources with Amplify backend
-  src/
-    App.tsx               # UI + calls Amplify Data client query
-  amplify.yml             # Amplify Hosting build steps (backend + frontend)
-  package.json            # Scripts and dependencies
-  docs/                   # Place README images/gifs here (see Gallery)
-```
-
----
 
 ## Local development (first‑time setup)
 
@@ -101,27 +81,6 @@ This command also writes the app’s configuration file `amplify_outputs.*` into
 npm run dev
 ```
 Open the printed local URL. Create an account, verify email, and try generating a recipe.
-
----
-
-## About amplify_outputs.json (common error and fix)
-If you see a Vite error like:
-- “Failed to resolve import '../amplify_outputs.json' ... Does the file exist?”
-
-It means the app has not yet written Amplify outputs.
-
-Fix:
-- Run one of the following from your project root:
-```bash
-# Single deployment, then exit
-npx ampx sandbox --profile <your-profile> --once
-
-# Or watch for changes (long‑running)
-npx ampx sandbox --profile <your-profile>
-```
-- After success, ensure `amplify_outputs.json` (or `amplify_outputs.ts/mjs` if you chose another format) is present at the project root and the import path in `src/App.tsx` is `../amplify_outputs.json`.
-
-Tip: You can choose the outputs format with `--outputs-format json|mjs|ts` if you prefer. Update the import accordingly.
 
 ---
 
@@ -162,24 +121,6 @@ const client = generateClient<Schema>({ authMode: "userPool" });
 
 ---
 
-## Troubleshooting
-- “Unknown argument: --yes” with `ampx sandbox`:
-  - The `--yes` flag isn’t supported. Use `npx ampx sandbox --once` or `npx ampx sandbox`.
-- “Failed to load default AWS credentials”:
-  - Configure a profile: `npx ampx configure profile`, then pass `--profile <name>`.
-  - Or export env vars in PowerShell session:
-    ```powershell
-    $env:AWS_ACCESS_KEY_ID="..."
-    $env:AWS_SECRET_ACCESS_KEY="..."
-    $env:AWS_REGION="us-east-1"
-    ```
-- Amplify Hosting build fails due to Node version:
-  - This repo uses Vite 5 to stay compatible with Node 18 build images. If you upgrade, ensure Node 20+ in your build image.
-- Amplify backend command not found in CI:
-  - `amplify.yml` includes backend `preBuild: npm ci`; ensure it’s present so `npx ampx` is available.
-
----
-
 ## Cleanup
 To delete the sandbox resources when you’re done developing:
 ```bash
@@ -188,12 +129,3 @@ npx ampx sandbox delete --profile <your-profile>
 To tear down Amplify Hosting resources, delete the app from the Amplify Console.
 
 ---
-
-## Open questions for you (to tailor this README)
-- Which AWS Region(s) are you targeting by default?
-- Which Bedrock model(s) did you enable and use?
-- Do you prefer `amplify_outputs` in `json`, `mjs`, or `ts` format?
-- Do you want to expose additional API fields (e.g., cuisine, diet) in the UI?
-- Any cost‑controls you’d like documented (quotas, model limits)?
-
-Provide the answers and I’ll update this README accordingly.
