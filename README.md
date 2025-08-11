@@ -151,15 +151,3 @@ To delete the sandbox resources when you’re done developing:
 ```bash
 npx ampx sandbox delete --profile <your-profile>
 ```
-To tear down Amplify Hosting resources, delete the app from the Amplify Console.
-
----
-
-## Open questions for you (to tailor this README)
-- Which AWS Region(s) are you targeting by default?
-- Which Bedrock model(s) did you enable and use?
-- Do you prefer `amplify_outputs` in `json`, `mjs`, or `ts` format?
-- Do you want to expose additional API fields (e.g., cuisine, diet) in the UI?
-- Any cost‑controls you’d like documented (quotas, model limits)?
-
-Provide the answers and I’ll update this README accordingly.
