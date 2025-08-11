@@ -2,6 +2,11 @@
 
 A full‑stack React + AWS Amplify Gen 2 application that lets users authenticate, enter ingredients, and receive an AI‑generated recipe. The app uses Amplify for auth and hosting, AppSync for the API, Lambda for server logic, and Amazon Bedrock for foundation models.
 
+<!-- Hero banner (add your screenshot to docs/hero.png) -->
+<p align="center">
+  <img src="docs/hero.png" alt="Meet Your Personal Recipe AI - hero screenshot" width="900" />
+</p>
+
 ### What you’ll get
 - **Frontend**: React + TypeScript + Vite 5, Amplify UI for Auth.
 - **Auth**: Amazon Cognito via Amplify `defineAuth` with email verification (custom subject/body).
@@ -17,7 +22,35 @@ A full‑stack React + AWS Amplify Gen 2 application that lets users authenticat
 - AppSync resolves a custom query (e.g., `askBedrock`) to a Lambda function.
 - Lambda calls Amazon Bedrock and returns the generated recipe text.
 
-Services: Amplify Hosting → AppSync → Lambda → Bedrock. Auth via Cognito.
+<p align="center">
+  <img src="docs/architecture.png" alt="High-level architecture: Amplify → AppSync → GraphQL → Lambda → Bedrock, Auth via Cognito" width="800" />
+</p>
+
+---
+
+## Gallery (screenshots & demo)
+Add the following images under `docs/` to enrich this README. Suggested filenames are already referenced below.
+
+- App hero: `docs/hero.png`
+- Auth: `docs/auth-sign-in.png`
+- Create account: `docs/auth-create-account.png`
+- Verification code: `docs/verification-code.png`
+- Ingredient prompt UI: `docs/recipe-input.png`
+- End‑to‑end demo GIF: `docs/demo.gif`
+
+<p align="center">
+  <img src="docs/auth-sign-in.png" alt="Amplify UI - Sign in" width="380" />
+  <img src="docs/auth-create-account.png" alt="Amplify UI - Create account" width="380" />
+</p>
+
+<p align="center">
+  <img src="docs/verification-code.png" alt="Amplify UI - verification code" width="420" />
+  <img src="docs/recipe-input.png" alt="Ingredients input and Generate button" width="420" />
+</p>
+
+<p align="center">
+  <img src="docs/demo.gif" alt="End-to-end app demo" width="900" />
+</p>
 
 ---
 
@@ -39,6 +72,7 @@ ai-recipe-generator/
     App.tsx               # UI + calls Amplify Data client query
   amplify.yml             # Amplify Hosting build steps (backend + frontend)
   package.json            # Scripts and dependencies
+  docs/                   # Place README images/gifs here (see Gallery)
 ```
 
 ---
@@ -151,3 +185,15 @@ To delete the sandbox resources when you’re done developing:
 ```bash
 npx ampx sandbox delete --profile <your-profile>
 ```
+To tear down Amplify Hosting resources, delete the app from the Amplify Console.
+
+---
+
+## Open questions for you (to tailor this README)
+- Which AWS Region(s) are you targeting by default?
+- Which Bedrock model(s) did you enable and use?
+- Do you prefer `amplify_outputs` in `json`, `mjs`, or `ts` format?
+- Do you want to expose additional API fields (e.g., cuisine, diet) in the UI?
+- Any cost‑controls you’d like documented (quotas, model limits)?
+
+Provide the answers and I’ll update this README accordingly.
