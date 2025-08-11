@@ -8,4 +8,10 @@ export const auth = defineAuth({
   loginWith: {
     email: true,
   },
+  // Use identityPool for better security and user management
+  userAttributes: {
+    email: {
+      required: true,
+    },
+  },
 });
